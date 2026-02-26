@@ -1,5 +1,9 @@
 import express from "express";
-import { bookTrain } from "../controllers/booking.controller.js";
+import {
+  bookTrain,
+  cancelTicket,
+  getBookings,
+} from "../controllers/booking.controller.js";
 import { protect } from "../middlewares/authorize.middleware.js";
 import { authorize } from "../middlewares/role.middleware.js";
 
@@ -9,8 +13,10 @@ bookingRouter.use(protect);
 
 bookingRouter.use(authorize("passenger"));
 
-// bookingRouter.get("/my-bookings");
+bookingRouter.get("/my-bookings", getBookings);
 
 bookingRouter.post("/book", bookTrain);
+
+bookingRouter.put("/cancel/:pnr", cancelTicket);
 
 export default bookingRouter;
