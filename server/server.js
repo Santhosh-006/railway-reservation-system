@@ -3,14 +3,18 @@ import connectDB from "./lib/db.js";
 import router from "./routes/auth.routes.js";
 import trainRouter from "./routes/train.route.js";
 import bookingRouter from "./routes/bookings.route.js";
+import cors from "cors";
+import trainSearchRouter from "./routes/trainSearch.route.js";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/", router);
 app.use("/train", trainRouter);
 app.use("/booking", bookingRouter);
+app.use("/user", trainSearchRouter);
 
 console.log("hello");
 
